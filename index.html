@@ -102,15 +102,18 @@
       filter: brightness(0.6);
     }
 
-  header .overlay {
+header .overlay {
   position: absolute;
-  top: 55%;  /* 往下移动一点，之前是50% */
+  top: auto;           /* 取消之前的 top 定位 */
+  bottom: 10%;         /* 距离底部 10%，你可以根据需求调节 */
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.7); /* 文字透明度70% */
+  transform: translateX(-50%);  /* 只水平居中，垂直去掉偏移 */
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  opacity: 0.7;  /* 整体透明度70%，logo和文字都生效 */
+  opacity: 0.7;
 }
+
+
 
     /* 名字容器，保持水平排列 */
     header .overlay h1 {
