@@ -302,6 +302,45 @@ header {
   overflow: hidden;
   background: #111; /* 和视频较暗色调接近，减少黑屏突兀感 */
 }
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--nav-text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a i {
+  font-size: 1.1rem;
+  line-height: 1;
+  /* 默认隐藏图标，桌面端只显示文字 */
+  display: none;
+}
+
+.nav-links a span {
+  /* 桌面端显示文字 */
+  display: inline;
+}
+
+/* 移动端调整 */
+@media screen and (max-width: 600px) {
+  .nav-links a {
+    padding: 6px 6px;
+    font-size: 1.2rem; /* 可以适当放大一点 */
+    justify-content: center;
+  }
+  .nav-links a i {
+    display: inline; /* 显示图标 */
+  }
+  .nav-links a span {
+    display: none; /* 隐藏文字 */
+  }
+}
 
 
   </style>
@@ -312,15 +351,14 @@ header {
   <!-- 导航栏 -->
 <nav class="navbar">
   <div class="nav-links">
-    <a href="#about">关于我</a>
-    <a href="#portfolio">作品集</a>
-    <a href="#services">服务项目</a>
-    <a href="#contact">联系我</a>
+    <a href="#about"><i class="fas fa-user"></i><span>关于我</span></a>
+    <a href="#portfolio"><i class="fas fa-image"></i><span>作品集</span></a>
+    <a href="#services"><i class="fas fa-cogs"></i><span>服务项目</span></a>
+    <a href="#contact"><i class="fas fa-envelope"></i><span>联系我</span></a>
   </div>
   <button onclick="toggleDarkMode()" id="darkModeBtn">
-  <i class="fas fa-sun"></i>
- </button>
-
+    <i class="fas fa-sun"></i>
+  </button>
 </nav>
 
 
