@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>摄像师 · MACRO</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
       --nav-text: #fff;
@@ -185,28 +185,53 @@ header .overlay {
     }
 
     .btn {
-      display: inline-block;
-      margin-top: 30px;
-      background: black;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s ease, border-color 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
+  display: inline-block;
+  margin-top: 30px;
+  background: black;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 
+    background-color 0.3s ease, 
+    border-color 0.3s ease, 
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
 
-    /* 暗黑模式下按钮白边框 */
-    body.dark .btn {
-      border: 1.5px solid #fff;
-      background: transparent;
-    }
+/* 亮色模式悬停 */
+.btn:hover {
+  background-color: #f39c12;
+  color: white;
+  box-shadow: 0 6px 16px rgba(243, 156, 18, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}
 
-    .btn:hover {
-      background: #555;
-    }
+/* 暗黑模式下按钮保持现有透明风格，悬停增加阴影和颜色 */
+body.dark .btn {
+  border: 1.5px solid #fff;
+  background: transparent;
+  color: #eee;
+  transition: 
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+body.dark .btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #f39c12;
+  color: #f39c12;
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.7);
+  transform: scale(1.05);
+}
+
 
     footer {
       background: #f4f4f4;
@@ -333,7 +358,7 @@ header {
 /* 移动端调整 */
 @media screen and (max-width: 600px) {
   .nav-links a {
-    padding: 6px 6px;
+    padding: 10px;
     font-size: 1.2rem; /* 可以适当放大一点 */
     justify-content: center;
   }
@@ -373,7 +398,7 @@ header {
     <!-- 用img替换文字 -->
     <img src="logo.png" alt="宏 · 摄像师" />
     <p id="tagline">用镜头捕捉情绪 · 纪录你的精彩瞬间</p>
-    <a href="https://mdl.ink/I1oBUW" class="btn-transparent">查看作品</a>
+    <a href="https://mdl.ink/I1oBUW" class="btn">查看作品</a>
   </div>
 </header>
 
@@ -465,10 +490,18 @@ header {
   }
 
   // 页面初次加载时立即设置一个随机标语，且每5秒切换
-  window.addEventListener('DOMContentLoaded', () => {
-    randomTagline();
-    setInterval(randomTagline, 5000);
-  });
+  // 初始加载设置正确图标
+window.addEventListener('DOMContentLoaded', () => {
+  const btnIcon = document.querySelector('#darkModeBtn i');
+  if (document.body.classList.contains('dark')) {
+    btnIcon.classList.remove('fa-moon');
+    btnIcon.classList.add('fa-sun');
+  } else {
+    btnIcon.classList.remove('fa-sun');
+    btnIcon.classList.add('fa-moon');
+  }
+});
+
 
   // 背景视频淡入淡出循环控制（去掉 loop）
   const bgVideo = document.getElementById('bgVideo');
@@ -476,9 +509,9 @@ header {
   // 确保去掉video标签的loop属性，改成JS控制循环
   bgVideo.removeAttribute('loop');
 
-  bgVideo.addEventListener('ended', () => {
-  // 先淡出到0.05，不完全透明，防止黑屏
-  bgVideo.style.opacity = 0.05;
+ bgVideo.addEventListener('ended', () => {
+  bgVideo.style.transition = 'opacity 0.5s ease';
+  bgVideo.style.opacity = 0.1;
 
   setTimeout(() => {
     bgVideo.currentTime = 0;
@@ -487,9 +520,16 @@ header {
 
   setTimeout(() => {
     bgVideo.style.opacity = 1;
-  }, 1000);
+  }, 600);
 });
 
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?322f5295e3914303ece3e7b3ae6fc1af";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 
 </script>
 
