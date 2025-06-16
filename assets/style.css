@@ -1,0 +1,441 @@
+:root {
+  --nav-text: #fff;
+  --bg-color: #fff;
+  --text-color: #111;
+  --footer-bg: #f4f4f4;
+  --footer-text: #111;
+  --btn-bg: #000;
+  --btn-text: #fff;
+  --btn-hover: #f39c12;
+  --navbar-scrolled: rgba(255, 255, 255, 0.95);
+  --navbar-scrolled-text: #111;
+  --transition-time: 0.3s;
+  --glow-color: #f39c12;
+  --glow-intensity: 0.6;
+}
+
+body.dark {
+  --nav-text: #eee;
+  --bg-color: #121212;
+  --text-color: #eee;
+  --footer-bg: #1a1a1a;
+  --footer-text: #ccc;
+  --btn-bg: transparent;
+  --btn-text: #eee;
+  --navbar-scrolled: rgba(0, 0, 0, 0.85);
+  --navbar-scrolled-text: #eee;
+  --glow-intensity: 0.8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: background-color var(--transition-time) ease, color var(--transition-time) ease;
+}
+
+/* 导航栏 */
+nav.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: transparent;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+  color: var(--nav-text);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--nav-text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a i {
+  font-size: 1.1rem;
+  display: none; /* 桌面端隐藏图标 */
+}
+
+.nav-links a span {
+  display: inline; /* 桌面端显示文字 */
+}
+
+nav.navbar a:hover,
+nav.navbar button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--btn-hover);
+}
+
+body.scrolled nav.navbar {
+  background: var(--navbar-scrolled);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+body.scrolled nav.navbar a {
+  color: var(--navbar-scrolled-text);
+}
+
+/* 暗黑模式按钮 */
+#darkModeBtn {
+  background: transparent;
+  padding: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#darkModeBtn i {
+  font-size: 1.2rem;
+  color: var(--nav-text);
+  transition: transform 0.3s ease, color 0.3s ease; /* 添加颜色过渡 */
+}
+
+#darkModeBtn:hover i {
+  color: var(--btn-hover);
+  transform: scale(1.1);
+}
+
+/* 导航栏滚动后增强图标对比度 */
+body.scrolled #darkModeBtn i {
+  color: var(--navbar-scrolled-text);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1); /* 添加轻微阴影增强可读性 */
+}
+
+body.scrolled.dark #darkModeBtn i {
+  color: rgba(255, 255, 255, 0.9); /* 暗黑模式下确保图标清晰 */
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 头部区域 */
+header {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #111;
+}
+
+header video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+header .overlay {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  width: 100%;
+  opacity: 0.7;
+}
+
+header .overlay img {
+  width: min(25vw, 220px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+  opacity: 0.7;
+}
+
+/* 标语 */
+#tagline {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  font-weight: 500;
+  min-height: 1.6em;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+
+#tagline.fade-out {
+  opacity: 0;
+}
+
+/* 内容区域 */
+section {
+  padding: 80px 10%;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+/* 作品集 */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-grid video,
+.portfolio-grid img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-grid video:hover,
+.portfolio-grid img:hover {
+  transform: scale(1.02);
+}
+
+/* 按钮样式 */
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1.5px solid var(--btn-text);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/* 按钮发光脉冲效果 */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: var(--glow-color);
+  opacity: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+/* 悬停时的发光脉冲与缩放效果 */
+.btn:hover {
+  background-color: var(--glow-color);
+  color: white;
+  box-shadow: 0 0 20px var(--glow-color), 0 6px 16px rgba(243, 156, 18, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  border-color: var(--glow-color);
+}
+
+/* 调整黄色光晕的大小和透明度 */
+.btn:hover::before {
+  width: 130px; /* 进一步缩小光晕尺寸 */
+  height: 130px; /* 进一步缩小光晕尺寸 */
+  opacity: 0.3; /* 降低透明度，让光晕更柔和 */
+}
+
+/* 点击反馈效果 */
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 0 10px var(--glow-color), 0 4px 10px rgba(243, 156, 18, 0.2);
+}
+
+/* 查看作品按钮专用优雅光晕动画 */
+.btn-glow-aura {
+  position: relative;
+}
+
+.btn-glow-aura::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%; /* 缩小光晕初始尺寸 */
+  height: 90%; /* 缩小光晕初始尺寸 */
+  background: var(--glow-color);
+  border-radius: 25px;
+  z-index: -2;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.1); /* 缩小最大扩散比例 */
+  box-shadow: 0 0 10px rgba(243, 156, 18, 0);
+  animation: aura 3s ease-in-out infinite;
+}
+
+@keyframes aura {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05); /* 初始扩散比例 */
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.2); /* 最大扩散比例 */
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05); /* 恢复初始比例 */
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0);
+  }
+}
+
+body.dark .btn-glow-aura::after {
+  animation: aura-dark 3s ease-in-out infinite;
+}
+
+@keyframes aura-dark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 25px rgba(243, 156, 18, 0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0);
+  }
+}
+
+/* 页脚 */
+footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 40px 10%;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: background var(--transition-time) ease, color var(--transition-time) ease;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 600px) {
+  header .overlay img {
+    width: 60vw;
+    max-width: 180px;
+  }
+  
+  .nav-links {
+    gap: 3vw;
+  }
+  
+  .nav-links a {
+    padding: 8px;
+    font-size: 1rem;
+  }
+  
+  .nav-links a i {
+    display: inline; /* 移动端显示图标 */
+  }
+  
+  .nav-links a span {
+    display: none; /* 移动端隐藏文字 */
+  }
+  
+  /* 移动端按钮尺寸调整 */
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* 欢迎消息样式 */
+#welcome-message {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#welcome-message.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#welcome-message .bg-white {
+  transform: scale(0.9);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#welcome-message.active .bg-white {
+  transform: scale(1);
+}
+
+/* 按钮样式 */
+#welcome-close {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#welcome-close:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
+:root {
+  --nav-text: #fff;
+  --bg-color: #fff;
+  --text-color: #111;
+  --footer-bg: #f4f4f4;
+  --footer-text: #111;
+  --btn-bg: #000;
+  --btn-text: #fff;
+  --btn-hover: #f39c12;
+  --navbar-scrolled: rgba(255, 255, 255, 0.95);
+  --navbar-scrolled-text: #111;
+  --transition-time: 0.3s;
+  --glow-color: #f39c12;
+  --glow-intensity: 0.6;
+  --primary-color: #f39c12;
+  --primary-dark: #e67e22;
+}
+
+body.dark {
+  --nav-text: #eee;
+  --bg-color: #121212;
+  --text-color: #eee;
+  --footer-bg: #1a1a1a;
+  --footer-text: #ccc;
+  --btn-bg: transparent;
+  --btn-text: #eee;
+  --navbar-scrolled: rgba(0, 0, 0, 0.85);
+  --navbar-scrolled-text: #eee;
+  --glow-intensity: 0.8;
+}
+
+/* 其他样式... */
