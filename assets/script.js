@@ -100,3 +100,17 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // 其他初始化代码...
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const videos = document.querySelectorAll("#portfolio video");
+
+  videos.forEach(video => {
+    video.addEventListener("play", () => {
+      videos.forEach(v => {
+        if (v !== video) {
+          v.pause();
+        }
+      });
+    });
+  });
+});
+

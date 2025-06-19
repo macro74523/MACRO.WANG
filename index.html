@@ -44,9 +44,9 @@
   <section id="portfolio">
     <h2>作品集</h2>
     <div class="portfolio-grid">
-      <video src="reel1.mp4" controls></video>
-      <video src="reel2.mp4" controls></video>
-      <video src="reel3.mp4" controls></video>
+      <video src="https://macrobox.oss-cn-guangzhou.aliyuncs.com/MP4/%E5%A4%A7%E5%94%90%E8%8D%94%E4%B9%A1.mp4" controls></video>
+      <video src="https://macrobox.oss-cn-guangzhou.aliyuncs.com/MP4/%E6%BB%A8%E6%B5%B7%E5%8D%8E%E9%99%84%E5%B0%8F%E5%AD%A6%E7%AF%87V3.mp4" controls></video>
+      <video src="https://macrobox.oss-cn-guangzhou.aliyuncs.com/MP4/%E6%BB%A8%E6%B5%B7%E5%8D%8E%E9%99%84%E9%AB%98%E4%B8%AD%E5%AE%A3%E4%BC%A0%E7%89%87.mp4" controls></video>
     </div>
   </section>
 
@@ -72,6 +72,21 @@
   </footer>
 
   <script src="assets/script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll("#portfolio video");
+
+    videos.forEach(video => {
+      video.addEventListener("play", () => {
+        videos.forEach(v => {
+          if (v !== video) {
+            v.pause();
+          }
+        });
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
